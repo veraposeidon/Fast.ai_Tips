@@ -1,0 +1,1420 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{digitalRecognition-resnext101\_64}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{kaggle-ux624bux5199ux6570ux5b57ux8bc6ux522b}{%
+\subsection{Kaggle
+手写数字识别}\label{kaggle-ux624bux5199ux6570ux5b57ux8bc6ux522b}}
+
+关于数据处理的参考：https://www.kaggle.com/vijaykris/mnist-classification-using-fast-ai-v2
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Put these at the top of every notebook, to get automatic reloading and inline plotting}
+        \PY{o}{\PYZpc{}}\PY{k}{reload\PYZus{}ext} autoreload
+        \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} This file contains all the main external libs we\PYZsq{}ll use}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{imports} \PY{k}{import} \PY{o}{*}
+        
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{transforms} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{conv\PYZus{}learner} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{model} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{dataset} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{sgdr} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{fastai}\PY{n+nn}{.}\PY{n+nn}{plots} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} 指定设备}
+        \PY{n}{torch}\PY{o}{.}\PY{n}{cuda}\PY{o}{.}\PY{n}{set\PYZus{}device}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{PATH} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/DigitRecognizer/}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{sz}\PY{o}{=}\PY{l+m+mi}{28}
+        \PY{n}{arch}\PY{o}{=}\PY{n}{resnext101\PYZus{}64}
+        \PY{n}{bs}\PY{o}{=}\PY{l+m+mi}{64}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{!}ls \PY{o}{\PYZob{}}PATH\PY{o}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+sample\_submission.csv  test.csv  tmp  train.csv
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} 根据label文件， 交叉验证分割训练集和验证集}
+        \PY{n}{train\PYZus{}csv} \PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{train.csv}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{n}{train\PYZus{}csv}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} header is not counted (\PYZhy{}1)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} 样本数目}
+        \PY{n}{n}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 42000
+\end{Verbatim}
+            
+    \hypertarget{ux7814ux7a76ux6570ux636e}{%
+\subsection{研究数据}\label{ux7814ux7a76ux6570ux636e}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{o}{!}ls \PY{o}{\PYZob{}}PATH\PY{o}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+sample\_submission.csv  test.csv  tmp  train.csv
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{train\PYZus{}csv}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}    label  pixel0  pixel1  pixel2  pixel3  pixel4  pixel5  pixel6  pixel7  \textbackslash{}
+         0      1       0       0       0       0       0       0       0       0   
+         1      0       0       0       0       0       0       0       0       0   
+         2      1       0       0       0       0       0       0       0       0   
+         3      4       0       0       0       0       0       0       0       0   
+         4      0       0       0       0       0       0       0       0       0   
+         
+            pixel8    {\ldots}     pixel774  pixel775  pixel776  pixel777  pixel778  \textbackslash{}
+         0       0    {\ldots}            0         0         0         0         0   
+         1       0    {\ldots}            0         0         0         0         0   
+         2       0    {\ldots}            0         0         0         0         0   
+         3       0    {\ldots}            0         0         0         0         0   
+         4       0    {\ldots}            0         0         0         0         0   
+         
+            pixel779  pixel780  pixel781  pixel782  pixel783  
+         0         0         0         0         0         0  
+         1         0         0         0         0         0  
+         2         0         0         0         0         0  
+         3         0         0         0         0         0  
+         4         0         0         0         0         0  
+         
+         [5 rows x 785 columns]
+\end{Verbatim}
+            
+    \hypertarget{ux6570ux636eux9884ux5904ux7406ux548cux4ea4ux53c9ux9a8cux8bc1ux5206ux5272}{%
+\subsection{数据预处理和交叉验证分割}\label{ux6570ux636eux9884ux5904ux7406ux548cux4ea4ux53c9ux9a8cux8bc1ux5206ux5272}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} 读取CSV}
+         \PY{n}{train}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{/train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{test}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{/test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} 训练图像和标签}
+         \PY{n}{images}\PY{o}{=}\PY{n}{train}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+         \PY{n}{labels}\PY{o}{=}\PY{n}{train}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(42000, 784)
+(42000, 1)
+(28000, 784)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} 一维图像转换为二维}
+         \PY{n}{images} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{values}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{labels}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{flatten}\PY{p}{(}\PY{p}{)}
+         \PY{n}{test\PYZus{}images} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{values}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{28}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}images}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(42000, 28, 28)
+(42000,)
+(28000, 28, 28)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{images}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{(}\PY{n}{images}\PY{p}{,}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{c+c1}{\PYZsh{} .astype(\PYZsq{}float32\PYZsq{})}
+         \PY{n}{test\PYZus{}images}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{(}\PY{n}{test\PYZus{}images}\PY{p}{,}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}.astype(\PYZsq{}float32\PYZsq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}images}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(42000, 28, 28, 3)
+(28000, 28, 28, 3)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} 省内存}
+         \PY{k}{del} \PY{n}{train}
+         \PY{k}{del} \PY{n}{test}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} 查看数据}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <matplotlib.image.AxesImage at 0x7ff3cfba8cf8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} 分割数据集}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         
+         \PY{n}{train\PYZus{}img}\PY{p}{,} \PY{n}{val\PYZus{}img}\PY{p}{,} \PY{n}{train\PYZus{}lbl}\PY{p}{,} \PY{n}{val\PYZus{}lbl} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}
+             \PY{n}{images}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{train\PYZus{}img}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{val\PYZus{}img}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(33600, 28, 28, 3)
+(8400, 28, 28, 3)
+
+    \end{Verbatim}
+
+    \hypertarget{ux8badux7ec3ux6a21ux578b}{%
+\subsection{训练模型}\label{ux8badux7ec3ux6a21ux578b}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} 数据扩增方式}
+         \PY{c+c1}{\PYZsh{} transformer}
+         \PY{n}{tfms} \PY{o}{=} \PY{n}{tfms\PYZus{}from\PYZus{}model}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{sz}\PY{p}{,} \PY{n}{aug\PYZus{}tfms}\PY{o}{=}\PY{n}{transforms\PYZus{}basic} \PY{o}{+} \PY{p}{[}\PY{n}{AddPadding}\PY{p}{(}\PY{n}{pad}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{RandomCrop}\PY{p}{(}\PY{n}{targ\PYZus{}sz}\PY{o}{=}\PY{l+m+mi}{28}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{max\PYZus{}zoom}\PY{o}{=}\PY{l+m+mf}{1.1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} 构建数据加载器}
+         \PY{n}{classes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{train\PYZus{}lbl}\PY{p}{)}
+         
+         \PY{n}{data}\PY{o}{=}\PY{n}{ImageClassifierData}\PY{o}{.}\PY{n}{from\PYZus{}arrays}\PY{p}{(}\PY{n}{path}\PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{tmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{trn}\PY{o}{=}\PY{p}{(}\PY{n}{train\PYZus{}img}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,} \PY{n}{train\PYZus{}lbl}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{val}\PY{o}{=}\PY{p}{(}\PY{n}{val\PYZus{}img}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,} \PY{n}{val\PYZus{}lbl}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{bs} \PY{o}{=} \PY{n}{bs}\PY{p}{,}
+                                              \PY{n}{classes}\PY{o}{=}\PY{n}{classes}\PY{p}{,}
+                                              \PY{n}{test}\PY{o}{=}\PY{n}{test\PYZus{}images}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,}
+                                              \PY{n}{tfms}\PY{o}{=}\PY{n}{tfms}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} 构建学习器}
+         \PY{n}{learn} \PY{o}{=} \PY{n}{ConvLearner}\PY{o}{.}\PY{n}{pretrained}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{precompute}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+100\%|██████████| 525/525 [00:35<00:00, 18.68it/s]
+100\%|██████████| 132/132 [00:08<00:00, 16.30it/s]
+100\%|██████████| 438/438 [00:26<00:00, 16.57it/s]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} 找最优学习率}
+         \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 83\%|████████▎ | 434/525 [00:08<00:02, 41.68it/s, loss=1.63] 
+                                                            
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} 根据曲线，选择学习率 lr= 0.1}
+         \PY{c+c1}{\PYZsh{} 进行训练，并根据train loss和 validation loss判断是否过拟合}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}1}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=8), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                    
+    0      0.274983   0.199311   0.93369   
+    1      0.198208   0.15306    0.948333                    
+    2      0.213818   0.136481   0.955595                    
+    3      0.160592   0.13811    0.955357                    
+    4      0.152863   0.12799    0.959643                    
+    5      0.139646   0.129716   0.961429                    
+    6      0.142631   0.119458   0.962143                    
+    7      0.137618   0.120047   0.964405                    
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} [array([0.12005]), 0.9644047619047619]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} 先保存模型}
+         \PY{c+c1}{\PYZsh{} 当然目前还是欠拟合的}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first\PYZus{}try}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first\PYZus{}try}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{ux6a21ux578bux4f18ux5316}{%
+\subsection{模型优化}\label{ux6a21ux578bux4f18ux5316}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} DropOut手段}
+         \PY{c+c1}{\PYZsh{} ps是Dropout参数}
+         \PY{n}{learn} \PY{o}{=} \PY{n}{ConvLearner}\PY{o}{.}\PY{n}{pretrained}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{precompute}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{ps}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} 找最优学习率}
+         \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 83\%|████████▎ | 437/525 [00:08<00:02, 38.06it/s, loss=2.06] 
+                                                            
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} 根据曲线，选择学习率 lr= 0.1}
+         \PY{c+c1}{\PYZsh{} 进行训练，并根据train loss和 validation loss判断是否过拟合}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=5), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                    
+    0      0.317158   0.19464    0.935119  
+    1      0.2598     0.1734     0.944881                    
+    2      0.207689   0.150801   0.952143                    
+    3      0.213899   0.13703    0.954881                    
+    4      0.174896   0.130922   0.957381                    
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} [array([0.13092]), 0.9573809523809523]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dropOut}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dropOut}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{precompute} \PY{o}{=} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} 找最优学习率}
+         \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 84\%|████████▍ | 442/525 [00:30<00:08,  9.32it/s, loss=1.13] 
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} 可以加上SGDR算法}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}1}\PY{p}{,} \PY{n}{n\PYZus{}cycle}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=15), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                    
+    0      0.26754    0.137729   0.955714  
+    1      0.228966   0.143739   0.954405                    
+    2      0.222551   0.129113   0.958452                    
+    3      0.234704   0.138637   0.955238                    
+    4      0.233933   0.128033   0.958214                    
+    5      0.213325   0.119944   0.960595                    
+    6      0.204307   0.122251   0.960119                    
+    7      0.234767   0.132185   0.957024                    
+    8      0.234062   0.13402    0.956786                    
+    9      0.22086    0.117657   0.961667                    
+    10     0.203032   0.123946   0.961071                    
+    11     0.183642   0.117649   0.961071                    
+    12     0.187012   0.113057   0.963095                    
+    13     0.170765   0.110144   0.964048                    
+    14     0.179473   0.110842   0.964048                    
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} [array([0.11084]), 0.964047619047619]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}lr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} 目前还是欠拟合状态}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{n}{n\PYZus{}cycle}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                    
+    0      0.183977   0.11308    0.964167  
+    1      0.165255   0.11386    0.963214                    
+    2      0.174176   0.113564   0.962619                    
+    3      0.174515   0.111123   0.964643                    
+    4      0.170266   0.110733   0.964405                    
+    5      0.177971   0.110655   0.96381                     
+    6      0.17023    0.109759   0.964048                    
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} [array([0.10976]), 0.964047619047619]
+\end{Verbatim}
+            
+    \hypertarget{ux591aux5206ux5e03ux7387ux5904ux7406}{%
+\subsection{多分布率处理}\label{ux591aux5206ux5e03ux7387ux5904ux7406}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} fast.ai 获取指定size的数据集}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}data}\PY{p}{(}\PY{n}{sz}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} 此处sz是做dataloader时将图像预处理为指定sz大小}
+             \PY{n}{tfms} \PY{o}{=} \PY{n}{tfms\PYZus{}from\PYZus{}model}\PY{p}{(}\PY{n}{arch}\PY{p}{,} \PY{n}{sz}\PY{p}{,} \PY{n}{aug\PYZus{}tfms}\PY{o}{=}\PY{n}{transforms\PYZus{}basic} \PY{o}{+} \PY{p}{[}\PY{n}{AddPadding}\PY{p}{(}\PY{n}{pad}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{RandomCrop}\PY{p}{(}\PY{n}{targ\PYZus{}sz}\PY{o}{=}\PY{n}{sz}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{max\PYZus{}zoom}\PY{o}{=}\PY{l+m+mf}{1.1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{ImageClassifierData}\PY{o}{.}\PY{n}{from\PYZus{}arrays}\PY{p}{(}\PY{n}{path}\PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{tmp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{trn}\PY{o}{=}\PY{p}{(}\PY{n}{train\PYZus{}img}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,} \PY{n}{train\PYZus{}lbl}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{val}\PY{o}{=}\PY{p}{(}\PY{n}{val\PYZus{}img}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,} \PY{n}{val\PYZus{}lbl}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{bs} \PY{o}{=} \PY{n}{bs}\PY{p}{,}
+                                              \PY{n}{classes}\PY{o}{=}\PY{n}{classes}\PY{p}{,}
+                                              \PY{n}{test}\PY{o}{=}\PY{n}{test\PYZus{}images}\PY{o}{/}\PY{l+m+mi}{255}\PY{p}{,}
+                                              \PY{n}{tfms}\PY{o}{=}\PY{n}{tfms}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} 找最优学习率}
+         \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 83\%|████████▎ | 438/525 [00:29<00:03, 23.94it/s, loss=0.578]
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} differencial learning rate的分配，除了第三个参数是针对全连接层的，第一二个参数平均分配剩余测网络层}
+         \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}2}
+         \PY{n}{lrs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{lr}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} 从新训练}
+         \PY{c+c1}{\PYZsh{} 事实上，可以直接跳过从预训练模型中训练全连接层参数这一步，直接unfreeze进行全部权重的训练}
+         \PY{c+c1}{\PYZsh{} 但是，预训练模型的卷积层参数不是随机的，而是在ImageNet数据集上训练过的。}
+         \PY{c+c1}{\PYZsh{}（对于与ImageNet类似的数据，是好事，对于与ImageNet不同的数据集，也比没有要好）}
+         \PY{c+c1}{\PYZsh{} 但是全连接层又是全部随机的，所以对于全连接层，可以先进行一次训练（在预训练卷积参数的帮助下），使之比随机要好，}
+         \PY{c+c1}{\PYZsh{} 然后再放开卷积层的参数，对其进行全部的训练}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{unfreeze}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lrs}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                     
+    0      0.105211   0.052219   0.983929  
+    1      0.072058   0.038679   0.987143                     
+    2      0.04859    0.031206   0.990714                     
+    3      0.049083   0.034584   0.988929                     
+    4      0.040643   0.028713   0.990476                     
+    5      0.029351   0.02445    0.991786                     
+    6      0.026229   0.023161   0.991905                     
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} [array([0.02316]), 0.991904761904762]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}sz\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}loss}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{sz}\PY{o}{=}\PY{l+m+mi}{56}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{sz}\PY{p}{)}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{freeze}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lr}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                    
+    0      0.757907   0.570661   0.844286  
+    1      0.499019   0.304121   0.914405                    
+    2      0.455893   0.281939   0.918571                    
+    3      0.402226   0.225838   0.934643                    
+    4      0.36548    0.193338   0.942381                    
+    5      0.325702   0.182049   0.947024                    
+    6      0.318741   0.175933   0.948452                    
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} [array([0.17593]), 0.9484523809523809]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{unfreeze}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lrs}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}sz\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}loss}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                     
+    0      0.058693   0.034893   0.989524  
+    1      0.054986   0.026994   0.992143                     
+    2      0.036006   0.021957   0.992619                     
+    3      0.034336   0.025406   0.99131                      
+    4      0.026008   0.021791   0.991905                     
+    5      0.014845   0.020832   0.993452                     
+    6      0.013636   0.01937    0.99381                      
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{56}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c+c1}{\PYZsh{} sz为56时已经很完美了，trainloss越等于validationloss了。}
+         \PY{n}{sz}\PY{o}{=}\PY{l+m+mi}{112}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{sz}\PY{p}{)}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{freeze}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lr}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                    
+    0      1.185216   0.996413   0.669762  
+    1      0.96527    0.736496   0.766905                    
+    2      0.868851   0.669329   0.790714                    
+    3      0.813786   0.56094    0.823571                    
+    4      0.743812   0.505451   0.842619                    
+    5      0.714868   0.486642   0.846905                    
+    6      0.705779   0.492632   0.8425                      
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} [array([0.49263]), 0.8425]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{unfreeze}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lrs}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}sz\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}loss}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                     
+    0      0.056944   0.039509   0.98869   
+    1      0.042435   0.028595   0.99119                      
+    2      0.024617   0.023517   0.992262                     
+    3      0.033676   0.022817   0.992976                     
+    4      0.022803   0.022622   0.993571                     
+    5      0.013123   0.019921   0.994524                     
+    6      0.012305   0.01797    0.994881                      
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ux63d0ux4ea4ux540eux5faeux8c03}{%
+\subsection{提交后微调}\label{ux63d0ux4ea4ux540eux5faeux8c03}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{112}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{sz}\PY{o}{=}\PY{l+m+mi}{28}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{sz}\PY{p}{)}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{freeze}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{c+c1}{\PYZsh{} 找最优学习率}
+         \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 86\%|████████▋ | 453/525 [00:31<00:06, 10.91it/s, loss=0.832]
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{c+c1}{\PYZsh{} differencial learning rate的分配，除了第三个参数是针对全连接层的，第一二个参数平均分配剩余测网络层}
+         \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}1}
+         \PY{n}{lrs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{lr}\PY{p}{]}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lr}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                    
+    0      0.14694    0.080192   0.974643  
+    1      0.111392   0.06995    0.9775                      
+    2      0.106289   0.060855   0.980595                     
+    3      0.101301   0.068429   0.978333                     
+    4      0.103459   0.053477   0.981786                     
+    5      0.082989   0.052716   0.982857                     
+    6      0.083448   0.051086   0.982619                     
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:} [array([0.05109]), 0.9826190476190476]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{c+c1}{\PYZsh{} 找最优学习率}
+         \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 85\%|████████▌ | 448/525 [00:31<00:10,  7.29it/s, loss=0.265] 
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{unfreeze}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 73\%|███████▎  | 384/525 [01:11<00:22,  6.22it/s, loss=0.435]
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}3}
+         \PY{n}{lrs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{lr}\PY{p}{]}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lrs}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}sz\PYZcb{}}\PY{l+s+s1}{Again}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}loss}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                     
+    0      0.058292   0.027155   0.991786  
+    1      0.042599   0.024554   0.992738                     
+    2      0.04625    0.023759   0.992738                     
+    3      0.050641   0.023497   0.993333                     
+    4      0.030357   0.022129   0.992976                     
+    5      0.036625   0.021471   0.994048                     
+    6      0.034601   0.021643   0.994048                     
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{c+c1}{\PYZsh{} 还有继续拟合空间}
+         \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 51\%|█████▏    | 270/525 [00:50<00:40,  6.22it/s, loss=0.095] 
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}4}
+         \PY{n}{lrs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{lr}\PY{p}{]}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lrs}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}sz\PYZcb{}}\PY{l+s+s1}{Again2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}loss}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                     
+    0      0.030013   0.021631   0.993452  
+    1      0.038439   0.021415   0.993571                     
+    2      0.036066   0.021714   0.993214                     
+    3      0.028524   0.020903   0.99381                      
+    4      0.026395   0.022412   0.993571                     
+    5      0.027481   0.021069   0.994524                     
+    6      0.032142   0.02132    0.993929                     
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_65_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    loss降不下去了。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{sz}\PY{o}{=}\PY{l+m+mi}{112}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{set\PYZus{}data}\PY{p}{(}\PY{n}{get\PYZus{}data}\PY{p}{(}\PY{n}{sz}\PY{p}{)}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{freeze}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 84\%|████████▍ | 441/525 [00:56<00:14,  5.81it/s, loss=4.92]
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_68_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}2}
+         \PY{n}{lrs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{lr}\PY{p}{]}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lr}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                    
+    0      1.091641   0.756396   0.803214  
+    1      0.767363   0.420683   0.885                       
+    2      0.691721   0.382925   0.892976                    
+    3      0.631434   0.319758   0.909881                    
+    4      0.580153   0.291494   0.918095                    
+    5      0.568056   0.271639   0.921786                    
+    6      0.554687   0.264963   0.923214                    
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} [array([0.26496]), 0.9232142857142858]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{learn}\PY{o}{.}\PY{n}{unfreeze}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lrf}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{lr\PYZus{}find}\PY{p}{(}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=1), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+ 73\%|███████▎  | 382/525 [02:46<01:00,  2.36it/s, loss=0.252] 
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{5e\PYZhy{}3}
+         \PY{n}{lrs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{9}\PY{p}{,}\PY{n}{lr}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{lr}\PY{p}{]}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{lrs}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{cycle\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cycle\PYZus{}mult}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}sz\PYZcb{}}\PY{l+s+s1}{Again3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{learn}\PY{o}{.}\PY{n}{sched}\PY{o}{.}\PY{n}{plot\PYZus{}loss}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+HBox(children=(IntProgress(value=0, description='Epoch', max=7), HTML(value='')))
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+epoch      trn\_loss   val\_loss   accuracy                     
+    0      0.022228   0.020633   0.993929  
+    1      0.020429   0.01919    0.993929                     
+    2      0.014612   0.017838   0.994762                     
+    3      0.015562   0.022461   0.993333                      
+    4      0.010581   0.022268   0.993929                      
+    5      0.00785    0.020098   0.994048                      
+    6      0.004554   0.018898   0.99381                       
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ux9884ux6d4bux63d0ux4ea4}{%
+\subsection{预测提交}\label{ux9884ux6d4bux63d0ux4ea4}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{log\PYZus{}preds\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{learn}\PY{o}{.}\PY{n}{TTA}\PY{p}{(}\PY{n}{is\PYZus{}test}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{probs\PYZus{}test}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{log\PYZus{}preds\PYZus{}test}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{probs\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                                             
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} (28000, 10)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{c+c1}{\PYZsh{} 转成pandas格式}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{probs\PYZus{}test}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}85}]:}           0             1             2             3             4  \textbackslash{}
+         0  0.000017  3.990781e-06  9.998549e-01  6.500037e-05  2.669223e-06   
+         1  0.999985  3.287467e-07  7.486570e-07  1.814502e-07  1.493309e-07   
+         2  0.000019  1.306887e-06  1.431316e-04  4.553310e-06  2.107268e-04   
+         3  0.998095  1.450757e-05  6.196879e-04  3.026148e-05  3.212359e-06   
+         4  0.000002  1.282164e-06  1.330045e-04  9.995996e-01  5.865684e-08   
+         
+                       5             6             7         8         9  
+         0  3.329097e-06  4.568560e-06  3.594458e-05  0.000008  0.000005  
+         1  6.618133e-07  8.587524e-06  2.826225e-07  0.000001  0.000002  
+         2  6.744819e-06  1.101093e-05  3.909314e-04  0.000048  0.999165  
+         3  2.989436e-05  8.257570e-04  2.177610e-05  0.000107  0.000252  
+         4  8.057583e-05  1.854530e-07  3.295734e-06  0.000177  0.000003  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{c+c1}{\PYZsh{} 找概率最大的作为结果}
+         \PY{n}{df}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{Label}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{ImageId}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{n}{dfResult}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ImageId}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{dfResult}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}87}]:}    ImageId  Label
+         0        1      2
+         1        2      0
+         2        3      9
+         3        4      0
+         4        5      3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{dfResult}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:} (28000, 2)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{c+c1}{\PYZsh{} 写入csv文件并压缩}
+         \PY{n}{SUBM} \PY{o}{=} \PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}PATH\PYZcb{}}\PY{l+s+s1}{submOverFit/}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{SUBM}\PY{p}{,} \PY{n}{exist\PYZus{}ok}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{dfResult}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}SUBM\PYZcb{}}\PY{l+s+s1}{subm.gz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{compression}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gzip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{c+c1}{\PYZsh{} 显示文件路径链接}
+         \PY{n}{FileLink}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}SUBM\PYZcb{}}\PY{l+s+s1}{subm.gz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}90}]:} /home/ubuntu/Fast.ai\_Tips/dl1/data/DigitRecognizer/submOverFit/subm.gz
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
